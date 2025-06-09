@@ -1,16 +1,16 @@
 const CONFIG = {
-    titleWeb: "Tiêu đề web",
-    introTitle: 'Tên người yêu bạn',
+    titleWeb: "Helo Cục Cứk Của Đức Trọng Hẹ Hẹ",
+    introTitle: 'Helo Tường Vy',
     introDesc: `Trái đất vốn lạ thường
-    Mà sao em cứ đi nhầm đường
+    Mà sao cục cứk cứ đi nhầm đường
     Lạc vào tim anh lẻ loi
-    Đằng sau chữ yêu đây là thương`,
+    Đằng sau chữ yêu đây là thương hoho' ,
     btnIntro: '^^HiHi^^',
-    title: 'Phải chăng em đã yêu ngay từ cái nhìn đầu tiên 🥰',
-    desc: 'Phải chăng em đã say ngay từ lúc thấy nụ cười ấy ',
+    title: 'Phải chăng tui đã yêu bà , nghiện rùi 🥰',
+    desc: 'Cục nọng cùa bà với khuôn mặt nhìn rất thưởng dê hẹ hẹ:) ',
     btnYes: 'Thích lắm <33',
     btnNo: 'Không nha :3',
-    question: 'Trên thế giới hơn 7 tỉ người mà sao bạn lại yêu mình <3',
+    question: 'Trên thế giới hơn 7 tỉ người mà sao bạn lại yêu mình vậy <3',
     btnReply: 'Gửi cho bạn <3',
     reply: 'Yêu thì yêu mà không yêu thì yêu <33333333',
     mess: 'Mình biết mà 🥰. Yêu bạn nhiều nhiều 😘😘',
