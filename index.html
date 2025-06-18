@@ -1,56 +1,799 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FREE WIBESITE</title>
+  <link rel="icon" href="images/20250406_215203.png" type="image/png">
+  <style>
+    /* Reset */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      background: #121212;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: white;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-<head>
-    <title id="titleWeb"></title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    /* Navbar */
+    .navbar {
+      background: rgba(10,10,10,0.7);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .navbar a {
+      color: white;
+      font-weight: 600;
+      font-size: 18px;
+      padding: 8px 18px;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+    }
+    .navbar a:hover,
+    .navbar a.active {
+      background: #3a8ee6;
+      color: black;
+    }
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/spinload.css">
-    <link rel="stylesheet" type="text/css" href=" https://fonts.googleapis.com/css?family=Pacifico" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    /* Logo */
+    .logo-container {
+      text-align: center;
+      margin: 40px 0 25px;
+    }
+    .logo-container img {
+      width: 280px;
+      height: 280px;
+      object-fit: contain;
+    }
+    .logo-text {
+      font-size: 3rem;
+      font-weight: 900;
+      text-shadow: 0 0 8px #3a8ee6;
+      font-family: 'Arial Black', Arial, sans-serif;
+      letter-spacing: 3px;
+      margin-top: 15px;
+    }
+    .logo-text .white {
+      color: white;
+    }
+    .logo-text .blue {
+      color: #3a8ee6;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 0 20px 80px;
+    }
+
+    /* Info Cards Container */
+    .info-section {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-bottom: 60px;
+      flex-wrap: wrap;
+      /* Ensure full screen and center content for intro */
+      min-height: 100vh;
+      align-items: center;
+      padding: 40px 20px;
+      background: #121212;
+      z-index: 10000;
+      position: relative;
+    }
+
+    /* Individual Info Card */
+    .info-card {
+      background: rgba(30,30,30,0.7);
+      border-radius: 20px;
+      box-shadow: 0 0 40px #3a8ee6cc;
+      padding: 30px 30px 40px;
+      width: 450px;
+      user-select: none;
+      color: white;
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow 0.5s ease;
+    }
+    .info-card:hover {
+      box-shadow: 0 0 70px #3a8ee6ff;
+    }
+    /* SLEEPYVN Card Red Variant */
+    .info-card.red {
+      box-shadow: 0 0 40px #e03a3acc;
+    }
+    .info-card.red:hover {
+      box-shadow: 0 0 70px #e03a3aff;
+    }
+
+    /* Image */
+    .info-card img {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #3a8ee6;
+      margin-bottom: 20px;
+      transition: border-color 0.5s ease;
+    }
+    .info-card.red img {
+      border-color: #e03a3a;
+    }
+
+    /* Name */
+    .info-name {
+      font-size: 2.5rem;
+      font-weight: 900;
+      margin-bottom: 8px;
+      letter-spacing: 1.5px;
+    }
+    .info-name.blue {
+      color: #3a8ee6;
+    }
+    .info-name.red {
+      color: #e03a3a;
+    }
+
+    /* Region & Discord */
+    .info-region,
+    .info-discord {
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+      opacity: 0.85;
+      font-weight: 600;
+    }
+
+    /* Skills Title */
+    .skills-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin: 20px 0 15px;
+      border-bottom: 2px solid;
+      padding-bottom: 6px;
+    }
+    .skills-title.blue {
+      border-color: #3a8ee6;
+    }
+    .skills-title.red {
+      border-color: #e03a3a;
+    }
+
+    /* Skill Bar Container */
+    .skill-bar {
+      margin-bottom: 18px;
+    }
+
+    /* Skill Label + Percent */
+    .skill-label {
+      font-weight: 600;
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 1rem;
+    }
+
+    /* Skill Bar Background */
+    .skill-bar-bg {
+      background: rgba(255,255,255,0.15);
+      height: 20px;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    /* Skill Bar Fill */
+    .skill-bar-fill {
+      height: 100%;
+      border-radius: 12px 0 0 12px;
+      width: 0;
+      transition: width 2.5s ease-out;
+    }
+    /* Blue fill */
+    .skill-bar-fill.blue {
+      background: #3a8ee6;
+      box-shadow: 0 0 12px #3a8ee6;
+    }
+    /* Red fill */
+    .skill-bar-fill.red {
+      background: #e03a3a;
+      box-shadow: 0 0 12px #e03a3a;
+    }
+
+    /* Section Titles */
+    h2.section-title {
+      font-size: 2.8rem;
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 30px;
+      color: #3a8ee6;
+      text-shadow: 0 0 8px #3a8ee6;
+      user-select: none;
+    }
+
+    /* Animations - fadeInUp */
+    .fadeIn {
+      opacity: 0;
+      transform: translateY(20px);
+      animation-fill-mode: forwards;
+      animation-name: fadeInUp;
+      animation-duration: 1s;
+      animation-timing-function: ease-out;
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Animations - fadeOutUp */
+    .fadeOutUp {
+      animation-name: fadeOutUp;
+      animation-duration: 1s;
+      animation-fill-mode: forwards;
+      animation-timing-function: ease-in;
+    }
+    @keyframes fadeOutUp {
+      to {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+    }
+
+    /* Main content container */
+    #main-content {
+      display: none;
+      opacity: 0;
+      padding: 40px 20px;
+      max-width: 1100px;
+      margin: auto;
+      color: white;
+    }
+
+  </style>
 </head>
+<body>
 
-<body onload="loadSound()">
-    <div class="wrapper">
-        <!-- Preloader -->
-        <div id="preloader">
-            <div class="spinner">
-                <div class="rect1"></div>
-                <div class="rect2"></div>
-                <div class="rect3"></div>
-                <div class="rect4"></div>
-                <div class="rect5"></div>
-            </div>
+  <!-- Intro info-section (shows first) -->
+  <div class="info-section" id="intro">
+    <!-- Your Info Card -->
+    <div class="info-card fadeIn" style="animation-delay: 0.2s;">
+      <img src="images/e977797f64504281ed1f4a8c1a3f5a85.webp" alt="Your Picture">
+      <div class="info-name blue">SLEEPYVN le 7wak</div>
+      
+      <div class="info-region">Palestine</div>
+      <div class="info-discord">Discord: https://discord.gg/zSf5V75KyA</div>
+
+      <div class="skills-title blue">Programming Skills</div>
+
+      <div class="skill-bar">
+        <div class="skill-label">Python <span class="skill-percent">90%</span></div>
+        <div class="skill-bar-bg">
+          <div class="skill-bar-fill blue" data-fill="90%" style="width: 90%;"></div>
         </div>
-        <div id="bg"></div>
-        <div class="content">
-            <header>
-                <h2 id="title"></h2>
-                <h4 id="desc"></h4>
-            </header>
-            <button id="yes" type="button" class="btn btn-danger btn-lg"> </button>
-            <button id="no" type="button" class="btn btn-info btn-lg"></button>
+      </div>
+      <div class="skill-bar">
+        <div class="skill-label">C++ <span class="skill-percent">85%</span></div>
+        <div class="skill-bar-bg">
+          <div class="skill-bar-fill blue" data-fill="85%" style="width: 85%;"></div>
         </div>
+      </div>
+      <div class="skill-bar">
+        <div class="skill-label">C# <span class="skill-percent">75%</span></div>
+        <div class="skill-bar-bg">
+          <div class="skill-bar-fill blue" data-fill="75%" style="width: 75%;"></div>
+        </div>
+      </div>
+      <div class="skill-bar">
+        <div class="skill-label">CSS <span class="skill-percent">95%</span></div>
+        <div class="skill-bar-bg">
+          <div class="skill-bar-fill blue" data-fill="95%" style="width: 95%;"></div>
+        </div>
+      </div>
+      <div class="skill-bar">
+        <div class="skill-label">HTML <span class="skill-percent">95%</span></div>
+        <div class="skill-bar-bg">
+          <div class="skill-bar-fill blue" data-fill="95%" style="width: 95%;"></div>
+        </div>
+      </div>
+      <div class="skill-bar">
+        <div class="skill-label">JavaScript <span class="skill-percent">90%</span></div>
+        <div class="skill-bar-bg">
+          <div class="skill-bar-fill blue" data-fill="90%" style="width: 90%;"></div>
+        </div>
+      </div>
     </div>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-    <script src="./config.js"></script>
-    <script src="./js/main.js"></script>
 
-    <script>
-        function loadSound() {
-            var audio = new Audio('sound/sound.mp3');
-            audio.play();
+    <!-- Info Card -->
+    <div class="info-card red fadeIn" style="animation-delay: 0.5s;">
+      <img src="images/8644ede9a6e95a985f2ea02b381668d5.webp" alt="SLEEPYVN Picture">
+      <div class="info-name red">SLEEPYVN</div>
+      <div class="info-region">Palestine</div>
+      <div class="info-discord">Discord: https://discord.gg/zSf5V75KyA</div>
+
+      <div class="skills-title red">Programming Skills</div>
+
+      <div class="skill-bar">
+        <div class="skill-label">Python <span class="skill-percent">85%</span></div>
+        <div class="skill-bar-bg">
+          <div class="skill-bar-fill red" data-fill="85%" style="width: 85%;"></div>
+        </div>
+      </div>
+      <div class="skill-bar">
+        <div class="skill-label">C++ <span class="skill-percent">80%</span></div>
+        <div class="skill-bar-bg">
+          <div class="skill-bar-fill red" data-fill="80%" style="width: 80%;"></div>
+        </div>
+      </div>
+      <div class="skill-bar">
+        <div class="skill-label">C# <span class="skill-percent">70%</span></div>
+        <div class="skill-bar-bg">
+          <div class="skill-bar-fill red" data-fill="70%" style="width: 70%;"></div>
+        </div>
+      </div>
+      <div class="skill-bar">
+        <div class="skill-label">CSS <span class="skill-percent">90%</span></div>
+        <div class="skill-bar-bg">
+          <div class="skill-bar-fill red" data-fill="90%" style="width: 90%;"></div>
+        </div>
+      </div>
+      <div class="skill-bar">
+        <div class="skill-label">HTML <span class="skill-percent">90%</span></div>
+        <div class="skill-bar-bg">
+          <div class="skill-bar-fill red" data-fill="90%" style="width: 90%;"></div>
+        </div>
+      </div>
+      <div class="skill-bar">
+        <div class="skill-label">JavaScript <span class="skill-percent">85%</span></div>
+        <div class="skill-bar-bg">
+          <div class="skill-bar-fill red" data-fill="85%" style="width: 85%;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main page content, initially hidden -->
+  <div id="main-content">
+  
+
+
+<meta charset="UTF-8">
+
+  <title>FREE WIBESITE</title>
+  <link rel="icon" href="images/20250406_215203.png" type="image/png">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+  /* Reset & basics */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  body {
+    background: #121212;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    overflow-x: hidden;
+    min-height: 100vh;
+    position: relative;
+  }
+  /* Navbar */
+  .navbar {
+    background: rgba(10,10,10,0.7);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .navbar a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 18px;
+    padding: 6px 14px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+  }
+  .navbar a:hover,
+  .navbar a.active {
+    background: #3a8ee6;
+    color: black;
+  }
+
+  /* Logo */
+  .logo-container {
+    text-align: center;
+    margin: 40px 0 20px;
+  }
+.logo-container img {
+  width: 300px;
+  height: 300px;
+  object-fit: contain;
+}
+
+.logo-text {
+  margin-top: 15px;
+  font-size: 2.8rem;          /* same size as Why Choose Our Panels? */
+  font-weight: 900;           /* heavy bold */
+  text-align: center;         /* center the text */
+  letter-spacing: 2px;
+  user-select: none;
+  text-shadow: 0 0 6px #3a8ee6; /* glowing blue shadow */
+  font-family: 'Arial Black', Arial, sans-serif; /* keep your font */
+}
+
+.logo-text .white {
+  color: white;
+}
+.logo-text .blue {
+  color: #3a8ee6;
+}
+
+
+  /* Sections container */
+  .container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 0 20px 80px;
+  }
+  .glass {
+background: rgba(30,30,30,0.5);
+    border-radius: 15px;
+    box-shadow: 0 0 40px rgba(58,142,230,0.2);
+    padding: 30px 25px;
+  }
+ .servicesa {
+background: rgba(30,30,30,0.5);
+    border-radius: 15px;
+    box-shadow: 0 0 40px rgba(58,142,230,0.2);
+    padding: 30px 25px;
+  }
+  /* Why Us Section */
+  #why-us {
+    margin-bottom: 50px;
+  }
+  #why-us h2 {
+    font-size: 2.8rem;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 25px;
+    color: #3a8ee6;
+    text-shadow: 0 0 6px #3a8ee6;
+  }
+    #why-us1 {
+    margin-bottom: 50px;
+  }
+
+   #why-us1 h2 {
+    font-size: 2.8rem;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 25px;
+    color: #3a8ee6;
+    text-shadow: 0 0 6px #3a8ee6;
+  }
+  .why-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .reason-btn {
+    border: 2px solid #3a8ee6;
+    background: transparent;
+    color: white;
+    font-size: 1.2rem;
+    padding: 14px 32px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
+    min-width: 180px;
+    text-align: center;
+  }
+  .reason-btn:hover {
+    background-color: #3a8ee6;
+    color: black;
+  }
+
+  /* Panels */
+  #panels {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 26px;
+  }
+  .panel-card {
+    background: rgba(40,40,40,0.75);
+    border-radius: 18px;
+    box-shadow: 0 0 20px #3a8ee6aa;
+    padding: 28px 25px 36px;
+    width: 320px;
+    cursor: pointer;
+    color: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    user-select: none;
+  }
+  .panel-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 40px #3a8ee6ff;
+  }
+  .panel-title {
+    font-weight: 800;
+    font-size: 1.7rem;
+    margin-bottom: 14px;
+    text-align: center;
+    color: #3a8ee6;
+    text-shadow: 0 0 5px #3a8ee6cc;
+  }
+  .panel-price {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+    color: white;
+  }
+  .panel-desc {
+    font-size: 1rem;
+    line-height: 1.4;
+    margin-bottom: 18px;
+    text-align: center;
+    color: #ddd;
+    min-height: 68px;
+  }
+
+  /* Smooth blue line background following cursor */
+  #cursor-line {
+    position: fixed;
+    pointer-events: none;
+    top: 0; left: 0;
+    width: 300px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #3a8ee6, transparent);
+    border-radius: 2px;
+    opacity: 0.4;
+    transform-origin: left center;
+    transition: transform 0.1s ease-out;
+    z-index: 5;
+  }
+  .panelks{
+    font-size: 2.8rem;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 25px;
+    
+    color: #3a8ee6;
+    text-shadow: 0 0 6px #3a8ee6;
+  }
+  /* Footer */
+  footer {
+    background: #1c1c1c;
+    color: #888;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 0.9rem;
+    user-select: none;
+  }
+  footer a {
+    color: #3a8ee6;
+    text-decoration: none;
+  }
+  footer a:hover {
+    text-decoration: underline;
+  }
+
+  /* Responsive */
+  @media (max-width: 720px) {
+    #panels {
+      flex-direction: column;
+      align-items: center;
+    }
+    .panel-card {
+      width: 90%;
+    }
+    .why-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+    .reason-btn {
+      min-width: 90%;
+      max-width: 300px;
+    }
+   
+  }
+</style>
+
+
+
+  <!-- Navbar -->
+  <nav class="navbar glass">
+    <a class="active" href="/">Home</a>
+    <a href="#panels">Our Services</a>
+    <a href="#privacy">Privacy</a>
+    <a href="/contact">Contact Us</a>
+    <a href="/terms">Terms</a>
+  </nav>
+
+  <!-- Logo -->
+  <div class="logo-container">
+    <div class="logo-text">
+      <span class="white">SLEEPYVN</span> <span class="blue">WebSite</span>
+    </div>
+    <img src="images/20250406_215203.png" alt="SLEEPYVN ;">
+    
+  </div>
+
+  <main class="container">
+
+    <!-- Why Choose Our Panels -->
+    <section id="why-us" class="glass">
+      <h2>Why Choose Our Panels?</h2>
+      <div class="why-buttons">
+        <button class="reason-btn">Safe & Undetected</button>
+        <button class="reason-btn">Regular Updates</button>
+        <button class="reason-btn">Easy to Use</button>
+        <button class="reason-btn">Premium Support</button>
+        <button class="reason-btn">Affordable Prices</button>
+      </div>
+    </section>
+
+<h2 class="panelks">Our Services</h2>
+
+    <!-- Panels -->
+    <section id="panels" class="servicesa">
+      
+
+      
+      <div class="panel-card" onclick="goToPanel('cheat-bypass.html')">
+        <div class="panel-title">Panel Bypass</div>
+        <div class="panel-price">Available</div>
+        <div class="panel-desc">Bypass anti-cheat protections safely with this lightweight panel.</div>
+      </div>
+
+      <div class="panel-card" onclick="goToPanel('cheat-external.html')">
+        <div class="panel-title">Panel External</div>
+        <div class="panel-price">Available</div>
+        <div class="panel-desc">External hacks featuring smooth aimbot, ESP, and overlay support.</div>
+      </div>
+
+      <div class="panel-card" onclick="goToPanel('cheat-internal.html')">
+        <div class="panel-title">Panel Internal</div>
+        <div class="panel-price">Available</div>
+        <div class="panel-desc">Internal memory-based cheats with advanced features and radar hack.</div>
+      </div>
+
+      <div class="panel-card" onclick="goToPanel('cheat-superem.html')">
+        <div class="panel-title">Panel Supreme</div>
+        <div class="panel-price">Available</div>
+        <div class="panel-desc">Our premium panel with all cheats and anti-detection technology.</div>
+      </div>
+      <div class="panel-card" onclick="goToPanel('cheat-silent.html')">
+        <div class="panel-title">Silent Aim </div>
+        <div class="panel-price">Available</div>
+        <div class="panel-desc">Shoot and get headshots without aiming at the enemy</div>
+      </div>
+    
+
+ 
+    </section>
+
+    <!-- Privacy Section -->
+    <section id="panels" class="servicesa">
+      <h2 style="text-align:center; color:#3a8ee6; margin-bottom: 25px;">Privacy Policy</h2>
+      <p class="privacytext">
+        We respect your privacy. Your data will never be shared or sold. Transactions and communication are secured.
+      </p>
+      <p>
+        We Do Not Leak Our Trading, Everything is private and secured with us
+      </p>
+    </section>
+
+  </main>
+
+  <!-- Cursor-following blue line -->
+  <div id="cursor-line"></div>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 SLEEPYVN X!ters. All rights reserved. | <a href="/terms">Terms & Conditions | Developed And Build by Ayham </a>
+  </footer>
+
+  <script>
+    // Navigate to panel detail page
+    function goToPanel(page) {
+      window.location.href = page;
+    }
+
+    // Smooth blue line that follows cursor horizontally
+    const cursorLine = document.getElementById('cursor-line');
+    window.addEventListener('mousemove', (e) => {
+      const x = e.clientX;
+      const y = e.clientY;
+      cursorLine.style.top = y + 10 + 'px';
+      cursorLine.style.left = x - 150 + 'px'; // center line on cursor horizontally
+    });
+    // Smooth scrolling for internal page anchors
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const targetID = this.getAttribute('href').substring(1);
+    const targetElement = document.getElementById(targetID);
+    if (targetElement) {
+      window.scrollTo({
+        top: targetElement.offsetTop - 70, // adjust for sticky navbar height
+        behavior: 'smooth'
+      });
+    }
+  });
+});
+
+  </script>
+
+
+
+
+  </div>
+
+  <script>
+    // Animate skill bars filling on page load
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.skill-bar-fill').forEach(bar => {
+        const fill = bar.getAttribute('data-fill');
+        bar.style.width = fill;
+      });
+
+      // Wait 3 seconds, then fade out intro and fade in main content
+      setTimeout(() => {
+        const intro = document.getElementById('intro');
+        const main = document.getElementById('main-content');
+
+        // Add fadeOut animation to intro
+        intro.classList.add('fadeOutUp');
+
+        // When fadeOut animation ends
+        intro.addEventListener('animationend', () => {
+          intro.style.display = 'none';  // Hide intro completely
+
+          // Show main content and fade it in
+          main.style.display = 'block';
+          main.classList.add('fadeIn');
+        }, { once: true });
+      }, 3000);
+    });
+
+    // Smooth scroll for navbar links (optional, if you add a navbar)
+    document.querySelectorAll('.navbar a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if(target) {
+          target.scrollIntoView({ behavior: 'smooth' });
         }
-    </script>
-</body>
+        // Active link toggle
+        document.querySelectorAll('.navbar a').forEach(link => link.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  </script>
 
-</html>
+
+
+</body></html>
